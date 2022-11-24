@@ -11,6 +11,6 @@ class nAry
 		int gunViolence, underagedDeaths;
 		string state;
 		vector<nAry*> children;
-		void SetData();
+		void SetData(int gunViolence, int underagedDeaths, string state);
 };
 

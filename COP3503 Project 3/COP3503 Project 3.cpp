@@ -7,27 +7,28 @@
 
 using namespace std;
 
+
+
 int main()
 {
     //Create n-ary instance
-    nAry* root = new nAry;
+    nAry* node = new nAry;
 
     //Open file
     fstream fin;
     fin.open("Gun Violence Data.csv");
 
     //Declare string inputs
-    string row, word, temp;
-    string state, gunViolence;
-    int underageDeaths;
+    string row, word;
+    string state;
+    int underageDeaths, gunViolence;
     vector<string> ages;
 
+    getline(fin, row);
     //While program can input rows of data
     while (getline(fin, row)) {
         underageDeaths = 0;
         ages.clear();
-        //This is the first row that isnt the title
-        getline(fin, row);
         
         //Associate string object with stream
         stringstream s(row);
@@ -39,7 +40,7 @@ int main()
 
         //Stores fatalities
         getline(s, word, ',');
-        gunViolence = word;
+        gunViolence = stoi(word);
         cout << gunViolence << endl;
 
         //Stores ages of those involved 
@@ -50,12 +51,12 @@ int main()
         string token;
         while ((pos = str.find(delimiter)) != std::string::npos) {
             token = str.substr(0, pos);
-            std::cout << token << std::endl;
-            //ages.push_back(token);
+            //std::cout << token << std::endl;
+            ages.push_back(token);
             str.erase(0, pos + delimiter.length());
         }
-        std::cout << str << std::endl;
-        //ages.push_back(token);
+        //std::cout << str << std::endl;
+        ages.push_back(str);
         
 
 
@@ -65,20 +66,28 @@ int main()
         delimiter = "||";
         pos = 0;
         int count = 0;
+        int ageSize = ages.size();
         while ((pos = str.find(delimiter)) != std::string::npos) {
             token = str.substr(0, pos);
-            /*if (ages[count].find("Teen") != string::npos) {
-                if (token.find("Killed") != string::npos) {
+            
+            if ((count < ageSize) && (ages[count].find("Teen") != string::npos || ages[count].find("Child") != string::npos) 
+                && (token.find("Killed") != string::npos))
                     underageDeaths++;
-                }
-            }*/
+
             count++;
-            std::cout << token << std::endl;
+            //std::cout << token << std::endl;
             str.erase(0, pos + delimiter.length());
         }
-        std::cout << str << std::endl;
-
+        //std::cout << str << std::endl;
+        if ((ages[ageSize - 1].find("Teen") != string::npos || ages[ageSize - 1].find("Child") != string::npos) && 
+            (str.find("Killed") != string::npos))
+            underageDeaths++;
         
+
+        cout << underageDeaths << endl;
+
+
+        node->SetData(gunViolence, underageDeaths, state);
 
         //cout << underageDeaths << endl;
         //While program can input words from 
