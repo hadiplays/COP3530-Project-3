@@ -1,0 +1,11 @@
+state,n_killed,participant_age_group,participant_status
+Pennsylvania,0,0::Adult 18+||1::Adult 18+||2::Adult 18+||3::Adult 18+||4::Adult 18+,0::Arrested||1::Injured||2::Injured||3::Injured||4::Injured
+California,1,0::Adult 18+||1::Adult 18+||2::Adult 18+||3::Adult 18+,0::Killed||1::Injured||2::Injured||3::Injured
+Ohio,1,0::Adult 18+||1::Adult 18+||2::Adult 18+||3::Adult 18+||4::Adult 18+,0::Injured; Unharmed; Arrested||1::Unharmed; Arrested||2::Killed||3::Injured||4::Injured
+Colorado,4,0::Adult 18+||1::Adult 18+||2::Adult 18+||3::Adult 18+,0::Killed||1::Killed||2::Killed||3::Killed
+North Carolina,2,0::Adult 18+||1::Adult 18+||2::Teen 12-17||3::Adult 18+,0::Injured||1::Injured||2::Killed||3::Killed
+Oklahoma,4,0::Adult 18+||1::Adult 18+||2::Adult 18+||3::Adult 18+||4::Adult 18+||5::Adult 18+,0::Killed||1::Killed||2::Killed||3::Killed||4::Unharmed; Arrested||5::Unharmed; Arrested
+New Mexico,5,0::Adult 18+||1::Adult 18+||2::Child 0-11||3::Child 0-11||4::Child 0-11||5::Teen 12-17,0::Killed||1::Killed||2::Killed||3::Killed||4::Killed||5::Unharmed; Arrested
+Louisiana,0,,0::Injured||1::Injured||2::Injured||3::Injured||4::Injured
+California,0,0::Teen 12-17||1::Teen 12-17||2::Teen 12-17||4::Adult 18+,0::Injured||1::Injured||2::Injured||3::Injured||4::Unharmed
+Maryland,1,0::Teen 12-17||1::Adult 18+||2::Adult 18+||3::Adult 18+||4::Adult 18+||5::Adult 18+||6::Adult 18+,0::Killed||1::Injured||2::Injured||3::Injured||4::Injured||5::Injured||6::Injured

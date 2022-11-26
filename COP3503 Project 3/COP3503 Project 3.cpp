@@ -3,20 +3,86 @@
 #include <fstream>
 #include <sstream>
 #include <vector>
+#include <set>
+#include <queue>
 #include "nAry.h"
 
 using namespace std;
 
 
+nAry* SetData(nAry* root, int gunViolence, int underagedDeaths, string state, queue<nAry*>& trackPos) {
+    
+    /*if (trackPos.empty()) {
+        return nullptr;
+    }*/ //Dont use this if statement because it stops function from iterating; needs to be placed somewhere else though
+
+    if (root == nullptr) {
+        root = new nAry(gunViolence, underagedDeaths, state); 
+        for (int i = 0; i < 5; i++) {
+            root->children[i] = new nAry();
+            trackPos.push(root->children[i]);
+        }
+    }
+    else {
+        trackPos.front() = new nAry(gunViolence, underagedDeaths, state);
+        for (int i = 0; i < 5; i++) {
+            trackPos.front()->children[i] = new nAry();
+            trackPos.push(trackPos.front()->children[i]);
+        }
+        trackPos.pop();
+    }
+
+    
+
+    /*if (root->children.size() != 5) {
+        root->children.push_back(new nAry(gunViolence, underagedDeaths, state));
+    }
+    else {
+        SetData(root->trackPos.front(), gunViolence, underagedDeaths, state);
+        root->trackPos.pop();
+    }*/
+
+    return root;
+}
+
+//Prints nAry tree
+void SearchData(nAry* head) {
+
+    
+    queue<nAry*> q;
+    q.push(head);
+
+
+    while (!q.empty()) {
+
+        if (q.front() == nullptr) {
+            q.pop();
+            break;
+        }
+
+        cout << q.front()->state << " ";
+        cout << q.front()->gunViolence << " ";
+        cout << q.front()->underagedDeaths << " ";
+
+        for (int i = 0; i < 5; i++) q.push(q.front()->children[i]);
+
+        q.pop();
+
+    }
+
+}
 
 int main()
 {
+
+    queue<nAry*> trackPos;
+
     //Create n-ary instance
-    nAry* node = new nAry;
+    nAry* root = nullptr;
 
     //Open file
     fstream fin;
-    fin.open("Gun Violence Data.csv");
+    fin.open("Test Data.csv");
 
     //Declare string inputs
     string row, word;
@@ -36,12 +102,12 @@ int main()
         //Stores state
         getline(s, word, ',');
         state = word;
-        cout << state << endl;
+        //cout << state << endl;
 
         //Stores fatalities
         getline(s, word, ',');
         gunViolence = stoi(word);
-        cout << gunViolence << endl;
+        //cout << gunViolence << endl;
 
         //Stores ages of those involved 
         getline(s, word, ',');
@@ -58,7 +124,6 @@ int main()
         //std::cout << str << std::endl;
         ages.push_back(str);
         
-
 
         //Stores which of those involved were killed/injured
         getline(s, word, ',');
@@ -84,54 +149,20 @@ int main()
             underageDeaths++;
         
 
-        cout << underageDeaths << endl;
-
-
-        node->SetData(gunViolence, underageDeaths, state);
-
         //cout << underageDeaths << endl;
-        //While program can input words from 
-        //previously inputted row of data
-        //while (getline(s, word, ',')) {
-            //count++;
-            //for (int i = 0; i < 29; i++) {
-            //    getline(s, word, ',');
-            //    if (i == 2) {
-            //        state = word;
-            //    }
-            //    if (i == 5) {
-            //        gunViolence = word;
-            //    }
-            //    if (i == 18) {
-            //        std::string s = word;
-            //        std::string delimiter1 = "||";
-            //        size_t pos = 0;
-            //        std::string token;
-            //        while ((pos = s.find(delimiter1)) != std::string::npos) {
-            //            token = s.substr(0, pos);
-            //            //token = token.substr(3);
-            //            std::cout << token << std::endl;
-            //            s.erase(0, pos + delimiter1.length());
-            //        }
-            //        //s = s.substr(3);
-            //        std::cout << s << std::endl;
-            //        cout << state << " " << gunViolence << endl;
-            //    }
-            //}
-            //data.push_back()
-            
-            
-            /*temp = word;
-            cout << word << endl;
-            getline(s, word, ',');
-            temp = word;
-            cout << word << endl;
-            getline(s, word, ',');
-            state = word;
-            cout << word << endl;*/
 
-        //}
+        //Inserts a node into nAry tree
+        root = SetData(root, gunViolence, underageDeaths, state, trackPos);
+
     }
 
+    
 
+    //SearchData(root);
+
+    //cout << root->children[0]->gunViolence;
+    
+
+
+    return 0;
 }
