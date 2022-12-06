@@ -1,4 +1,5 @@
 #include <SFML/Graphics.hpp>
+#include "HashTable.h"
 #include <iostream>
 #include <fstream>
 #include <sstream>
@@ -48,7 +49,6 @@ nAry* SetData(nAry* root, int gunViolence, int underagedDeaths, string state, qu
 //Prints nAry tree
 void SearchData(nAry* head) {
 
-    
     queue<nAry*> q;
     q.push(head);
 
@@ -74,7 +74,7 @@ void SearchData(nAry* head) {
 
 int main()
 {
-
+    HashTable ht;
     queue<nAry*> trackPos;
 
     //Create n-ary instance
@@ -154,10 +154,14 @@ int main()
         //Inserts a node into nAry tree
         root = SetData(root, gunViolence, underageDeaths, state, trackPos);
 
+        // HASHTABLE INSERT
+        pair<int,int> value(gunViolence, underageDeaths);
+        ht.insert(state, value);
+
     }
 
     
-
+    ht.print();
     //SearchData(root);
 
     //cout << root->children[0]->gunViolence;

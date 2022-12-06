@@ -17,6 +17,9 @@ class HashTable {
         // first: death counter
         // second: underage death counter
     unordered_map<unsigned int,pair<int,int>> hashTable;
+
+    // list of string with its corresponding hash code
+    unordered_map<int,string> decoded;
     vector<string> states = {"Alaska",
                              "Alabama",
                              "Arkansas",
@@ -77,6 +80,7 @@ public:
     bool search(const string& key);
     int getDeathCount(const string& key);
     int getUnderageCount(const string& key);
+    void print();
 };
 
 

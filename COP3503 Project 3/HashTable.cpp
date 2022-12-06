@@ -16,7 +16,9 @@ unsigned int HashTable::hashFunction(const string &key) {
 
 void HashTable::insert(const string& key, pair<int, int> value) {
     unsigned int hashCode = hashFunction(key);
-    this->hashTable[hashCode] = value;
+    decoded[hashCode] = key;
+    this->hashTable[hashCode].first += value.first;
+    this->hashTable[hashCode].second += value.second;
 }
 
 int HashTable::numOfCollisions() {
@@ -50,4 +52,11 @@ int HashTable::getDeathCount(const string &key){
 int HashTable::getUnderageCount(const string &key){
     unsigned int hashCode = hashFunction(key);
     return this->hashTable[hashCode].second;
+}
+
+void HashTable::print() {
+    unordered_map<unsigned int,pair<int,int>>::iterator it;
+    for(it=this->hashTable.begin(); it!=this->hashTable.end(); it++){
+        cout << "State: " << decoded[it->first] << " | Deaths: " << it->second.first << " | Underage Deaths: " << it->second.second << endl;
+    }
 }
